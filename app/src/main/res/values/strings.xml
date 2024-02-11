@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="computer">Computer</string>
+    <string name="sorting">Sorting who will start.</string>
+    <string name="player_1_turn">Player 1 turn</string>
+    <string name="computer_turn">Computer turn\n</string>
+    <string name="player_2_turn">Player 2 turn</string>
+</resources>
