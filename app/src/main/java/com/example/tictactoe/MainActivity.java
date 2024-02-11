@@ -1,13 +1,18 @@
 package com.example.tictactoe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     int mode; // it stores if 1-player or 2-player mode
     int turn;  // it stores who plays next time
-    int scorePlayer1, scorePlayer2 = 0; // store the scores.
     Integer winner = null; // null=game running, 0=tie, 1=player1 won, 2=player2 won.
     TextView score1, score2, tv_player1, tv_player2, message; // they will be used to change screen content;
     String player1, player2; // store the player's name
@@ -27,10 +31,12 @@ Button bt_Continue;
     Button[] buttons;
 
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
     public void goMain(View view) { // change the screen and start the game
         setContentView(R.layout.activity_main);
@@ -68,7 +74,7 @@ Button bt_Continue;
         tv_player2Name = findViewById(R.id.tv_player2);
 
         if(mode == 1){
-            tv_player2Name.setText("Computer");
+            tv_player2Name.setText(R.string.computer);
             tv_player2Name.setVisibility(View.INVISIBLE);
         }
 
@@ -76,38 +82,45 @@ Button bt_Continue;
     private void StartGame() {
         for (Button b:buttons){
             b.setClickable(false);
-            b.setBackgroundColor(Color.parseColor("#0F0F50"));
+            b.setBackgroundColor(Color.parseColor("#4D000000"));
+
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+            b.startAnimation(animation);
+
         }
 
         winner = null;
 
         Random randomPlayer = new Random();
         turn = randomPlayer.nextInt(2) + 1;
+
+
         message.setText(R.string.sorting);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        message.startAnimation(animation);
 
         String firstMessage;
         if(turn == 1){
-            firstMessage = player1 + " start";
+            firstMessage = player1.concat(getString(R.string.start));
         }else{
-            firstMessage = player2 + " start";
+            firstMessage = player2.concat(getString(R.string.start));
         }
+        animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        message.startAnimation(animation);
 
-        MessageDelayed(firstMessage, 3000);
+        MessageDelayed(firstMessage);
 
         Handler delay = new Handler();
-        delay.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (mode == 1 && turn == 2){
-                    ComputerPlay();
-                }else{
-                    for(Button b : buttons){
-                        if(b == null){
-                            return;
-                        }
-                        if ( b.getText() == null || b.getText().equals("")){
-                            b.setClickable(true);
-                        }
+        delay.postDelayed(() -> {
+            if (mode == 1 && turn == 2){
+                ComputerPlay();
+            }else{
+                for(Button b : buttons){
+                    if(b == null){
+                        return;
+                    }
+                    if ( b.getText() == null || b.getText().equals("")){
+                        b.setClickable(true);
                     }
                 }
             }
@@ -130,6 +143,8 @@ Button bt_Continue;
         }
 
         buttonClicked.setText(token);
+        MediaPlayer pencil= MediaPlayer.create(MainActivity.this,R.raw.pencil);
+        pencil.start();
         buttonClicked.setClickable(false);
 
         ToggleTurn();
@@ -138,15 +153,22 @@ Button bt_Continue;
 
     private void ToggleTurn() {
         if(CheckWinner()){
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
             if(winner == 0){
-                message.setText("Tie");
+                message.setText(R.string.tie);
+                message.startAnimation(animation);
             }else if (winner==1){
-                message.setText(player1 + " won!");
+                message.setText(player1.concat(getString(R.string.won)));
+                message.startAnimation(animation);
             }else if (winner ==2){
-                message.setText(player2 + " won!");
+                message.setText(player2.concat(getString(R.string.won)));
             }
             bt_Continue.setVisibility(View.VISIBLE);
+            bt_Continue.startAnimation(animation);
+            bt_Continue.setClickable(true);
+
+
             return;
         }
         if(turn == 1){
@@ -156,10 +178,13 @@ Button bt_Continue;
         }
 
         if (turn == 1 ) {
-            message.setText(player1 + " turn");
+            message.setText(player1.concat(getString(R.string.turn)));
         }else {
-            message.setText(player2 + " turn");
+            message.setText(player2.concat(getString(R.string.turn)));
         }
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        message.startAnimation(animation);
+
 
         if (mode==1 && turn == 2){
             ComputerPlay();
@@ -178,6 +203,8 @@ Button bt_Continue;
 
     private boolean CheckWinner() {
 
+        MediaPlayer winnersound= MediaPlayer.create(MainActivity.this,R.raw.win_end);
+
 
         // check if player 1 won
         // row1
@@ -187,6 +214,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("row1");
+            winnersound.start();
             return true;
         }
         // row 2
@@ -196,6 +224,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("row2");
+            winnersound.start();
             return true;
         }
         // row 3
@@ -205,6 +234,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("row3");
+            winnersound.start();
             return true;
         }
         // column 1
@@ -214,6 +244,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("column1");
+            winnersound.start();
             return true;
         }
         //column 2
@@ -223,6 +254,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("column2");
+            winnersound.start();
             return true;
         }
         //column 3
@@ -232,6 +264,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("column3");
+            winnersound.start();
             return true;
         }
         // diagonal 1
@@ -241,6 +274,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("diagonal1");
+            winnersound.start();
             return true;
         }
         //diagonal2
@@ -250,6 +284,7 @@ Button bt_Continue;
             winner =1;
             score1.setText(String.valueOf( 1 + Integer.parseInt(score1.getText().toString())));
             HighLight("diagonal2");
+            winnersound.start();
             return true;
         }
 
@@ -261,6 +296,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("row1");
+            winnersound.start();
             return true;
         }
         // row 2
@@ -270,6 +306,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("row2");
+            winnersound.start();
             return true;
         }
         // row 3
@@ -279,6 +316,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("row3");
+            winnersound.start();
             return true;
         }
         // column 1
@@ -288,6 +326,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("column1");
+            winnersound.start();
             return true;
         }
         //column 2
@@ -297,6 +336,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("column2");
+            winnersound.start();
             return true;
         }
         //column 3
@@ -306,6 +346,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("column3");
+            winnersound.start();
             return true;
         }
         // diagonal 1
@@ -315,6 +356,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("diagonal1");
+            winnersound.start();
             return true;
         }
         if(buttons[2].getText().toString().equals("0") &&
@@ -323,6 +365,7 @@ Button bt_Continue;
             winner =2;
             score2.setText(String.valueOf( 1 + Integer.parseInt(score2.getText().toString())));
             HighLight("diagonal2");
+            winnersound.start();
             return true;
         }
 
@@ -335,6 +378,7 @@ Button bt_Continue;
 
 
         winner = 0;
+        winnersound.start();
         return true;
     }
 
@@ -342,47 +386,47 @@ Button bt_Continue;
 
         switch (line){
             case("row1"):
-                buttons[0].setBackgroundColor(Color.GRAY);
-                buttons[1].setBackgroundColor(Color.GRAY);
-                buttons[2].setBackgroundColor(Color.GRAY);
+                buttons[0].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[1].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[2].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
             case("row2"):
-                buttons[3].setBackgroundColor(Color.GRAY);
-                buttons[4].setBackgroundColor(Color.GRAY);
-                buttons[5].setBackgroundColor(Color.GRAY);
+                buttons[3].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[4].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[5].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
             case("row3"):
-                buttons[6].setBackgroundColor(Color.GRAY);
-                buttons[7].setBackgroundColor(Color.GRAY);
-                buttons[8].setBackgroundColor(Color.GRAY);
+                buttons[6].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[7].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[8].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
             case("column1"):
-                buttons[0].setBackgroundColor(Color.GRAY);
-                buttons[3].setBackgroundColor(Color.GRAY);
-                buttons[6].setBackgroundColor(Color.GRAY);
+                buttons[0].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[3].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[6].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
 
             case("column2"):
-                buttons[1].setBackgroundColor(Color.GRAY);
-                buttons[4].setBackgroundColor(Color.GRAY);
-                buttons[7].setBackgroundColor(Color.GRAY);
+                buttons[1].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[4].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[7].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
             case("column3"):
-                buttons[2].setBackgroundColor(Color.GRAY);
-                buttons[5].setBackgroundColor(Color.GRAY);
-                buttons[8].setBackgroundColor(Color.GRAY);
+                buttons[2].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[5].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[8].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
 
             case("diagonal1"):
-                buttons[0].setBackgroundColor(Color.GRAY);
-                buttons[4].setBackgroundColor(Color.GRAY);
-                buttons[8].setBackgroundColor(Color.GRAY);
+                buttons[0].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[4].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[8].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
 
             case("diagonal2"):
-                buttons[2].setBackgroundColor(Color.GRAY);
-                buttons[4].setBackgroundColor(Color.GRAY);
-                buttons[6].setBackgroundColor(Color.GRAY);
+                buttons[2].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[4].setBackgroundColor(Color.parseColor("#00000000"));
+                buttons[6].setBackgroundColor(Color.parseColor("#00000000"));
                 break;
 
         }
@@ -398,21 +442,21 @@ Button bt_Continue;
 
 
         Handler delay = new Handler();
-        delay.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for(int i =0; i<9; i++){
-                    if(buttons[i].getText().equals("")){
-                        possiblesIndex.add(i);
-                    }
+        delay.postDelayed(() -> {
+            for(int i =0; i<9; i++){
+                if(buttons[i].getText().equals("")){
+                    possiblesIndex.add(i);
                 }
-
-                int index = r.nextInt(possiblesIndex.size());
-                buttons[possiblesIndex.get(index)].setText("0");
-                unlockButtons();
-                ToggleTurn();
-
             }
+
+            int index = r.nextInt(possiblesIndex.size());
+            buttons[possiblesIndex.get(index)].setText("0");
+            MediaPlayer pencil= MediaPlayer.create(MainActivity.this,R.raw.pencil);
+            pencil.start();
+
+            unlockButtons();
+            ToggleTurn();
+
         }, 3000);
 
     }
@@ -423,23 +467,17 @@ Button bt_Continue;
         }
     }
 
-    private void MessageDelayed(String s, int time) {
+    private void MessageDelayed(String s) {
 
         Handler delay = new Handler();
-        delay.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                message.setText(s);
+        delay.postDelayed(() -> {
+            message.setText(s);
 
-                for(Button b: buttons){
-                    if(b.getText().equals("")){
-                        b.setClickable(true);
-                    }else{
-                        b.setClickable(false);
-                    }
-                }
+
+            for(Button b: buttons){
+                b.setClickable(b.getText().equals(""));
             }
-        }, time);
+        }, 3000);
 
     }
 
@@ -448,26 +486,33 @@ Button bt_Continue;
             b.setText("");
         }
         winner = null;
-        bt_Continue.setVisibility(View.INVISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        bt_Continue.startAnimation(animation);
+        bt_Continue.setClickable(false);
+        MediaPlayer continues = MediaPlayer.create(MainActivity.this,R.raw.continue_);
+        continues.start();
+
+
+
+
         StartGame();
     }
 
 
     public void ChooseNames(View view){
         if(tv_player1Name.getText().toString().equals("")){
-            player1 = "Player1";
+            player1 = "Player 1";
         }else{
             player1 = tv_player1Name.getText().toString();
         }
 
         if(tv_player2Name.getText() == null || tv_player2Name.getText().toString().equals("")){
-            player2 = "Player2";
+            player2 = "Player 2";
         }else{
             player2 = tv_player2Name.getText().toString();
         }
 
         goGame(view);
     }
+
 }
-
-

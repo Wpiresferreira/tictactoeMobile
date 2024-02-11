@@ -1,8 +1,30 @@
 <resources>
     <string name="app_name">TicTacToe</string>
     <string name="computer">Computer</string>
-    <string name="sorting">Sorting who will start.</string>
+    <string name="sorting">Sorting…</string>
     <string name="player_1_turn">Player 1 turn</string>
-    <string name="computer_turn">Computer turn\n</string>
+    <string name="computer_turn">Computer turn</string>
     <string name="player_2_turn">Player 2 turn</string>
+    <string name="tie">Tie</string>
+    <string name="won">" won"</string>
+    <string name="turn">" turn"</string>
+    <string name="start">" start"</string>
+    <string name="startMessage">" start!"</string>
+    <string name="title">Tic Tae Toe\nGame</string>
+    <string name="help">Help</string>
+    <string name="developed">Developed by Wagner Pires Ferreira - 2024-Feb</string>
+    <string name="playerVsComputer">1 Player mode (vs Computer)</string>
+    <string name="playerVsPlayer">2 Player mode</string>
+    <string name="goHome">Go Home</string>
+    <string name="textHelp">"Tic-tac-toe, noughts and crosses, or Xs and Os is a paper-and-pencil game for two players who take turns marking the spaces in a three-by-three grid with X or O. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner. It is a solved game, with a forced draw assuming best play from both players. (Source: Wikipedia: https://en.wikipedia.org/wiki/Tic-tac-toe). "</string>
+    <string name="score">Score</string>
+    <string name="player_1">Player 1\n</string>
+    <string name="token_1">X</string>
+    <string name="token_2">0</string>
+    <string name="player_2">Player 2\n</string>
+    <string name="initial_score">0</string>
+    <string name="continue_">Continue</string>
+    <string name="button_text">""</string>
+    <string name="choosePlayersNames">Choose the Player\'s Names</string>
+    <string name="ok">OK</string>
 </resources>

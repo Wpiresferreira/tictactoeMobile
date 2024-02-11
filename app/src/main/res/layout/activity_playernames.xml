@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_texture">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="#4D000000"
         android:minHeight="?attr/actionBarSize"
+        android:onClick="goMain"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +23,14 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="665dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="65dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
 
         <TextView
             android:id="@+id/textView"
@@ -34,7 +39,9 @@
             android:layout_marginLeft="60dp"
             android:layout_marginTop="100dp"
             android:layout_marginRight="60dp"
-            android:text="Choose the Player's Names"
+            android:fontFamily="@font/permanent_marker"
+            android:text="@string/choosePlayersNames"
+            android:textColor="#C1E8FF"
             android:textSize="24sp" />
 
         <EditText
@@ -45,9 +52,13 @@
             android:layout_marginTop="100dp"
             android:layout_marginRight="60dp"
             android:ems="10"
-            android:hint="Player 1"
+            android:fontFamily="@font/permanent_marker"
+            android:hint="@string/player_1"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:textColor="#C1E8FF"
+            android:textColorHint="#80C1E8FF"
+            android:textSize="24sp"
+            android:autofillHints="Type player name" />
 
         <EditText
             android:id="@+id/tv_player2"
@@ -57,9 +68,13 @@
             android:layout_marginTop="100dp"
             android:layout_marginRight="60dp"
             android:ems="10"
-            android:hint="Player 2"
+            android:fontFamily="@font/permanent_marker"
+            android:hint="@string/player_2"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:textColor="#C1E8FF"
+            android:textColorHint="#80C1E8FF"
+            android:textSize="24sp"
+            android:autofillHints="Type Player Name" />
 
         <Button
             android:id="@+id/button4"
@@ -68,8 +83,10 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="100dp"
             android:layout_marginRight="100dp"
+            android:backgroundTint="#4D000000"
             android:onClick="ChooseNames"
-            android:text="OK"
+            android:text="@string/ok"
+            android:textColor="#C1E8FF"
             android:textSize="24sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

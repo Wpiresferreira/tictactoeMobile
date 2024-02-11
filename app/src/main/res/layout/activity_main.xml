@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/blue_texture"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -13,7 +14,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:background="?attr/colorPrimary"
+        android:background="#4D000000"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,8 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2.0"
+            android:fontFamily="@font/permanent_marker"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Welcome to Tic-Tae-Toe Game"
+            android:text="@string/title"
+            android:textColor="#E3E3FF"
             android:textSize="40sp"
             android:textStyle="bold|italic" />
 
@@ -49,8 +52,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
+            android:backgroundTint="#4D000000"
+            android:fontFamily="@font/permanent_marker"
             android:onClick="goChooseNames"
-            android:text="1 Player mode (vs Computer)"
+            android:text="@string/playerVsComputer"
+            android:textColor="#E3E3FF"
             android:textSize="24sp" />
 
         <Button
@@ -58,8 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
+            android:backgroundTint="#4D000000"
+            android:fontFamily="@font/permanent_marker"
             android:onClick="goChooseNames"
-            android:text="2 Player mode"
+            android:text="@string/playerVsPlayer"
+            android:textColor="#E3E3FF"
             android:textSize="24sp" />
 
         <Button
@@ -67,15 +76,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
+            android:backgroundTint="#4D000000"
+            android:fontFamily="@font/permanent_marker"
             android:onClick="goHelp"
-            android:text="Help"
+            android:text="@string/help"
+            android:textColor="#E3E3FF"
             android:textSize="24sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2.0"
+            android:fontFamily="@font/permanent_marker"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Developed by Wagner Pires Ferreira - 2024-Feb" />
+            android:text="@string/developed"
+            android:textColor="#E3E3FF" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

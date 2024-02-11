@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/creative_background_with_rough_painted_texture">
@@ -13,7 +12,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:background="@color/material_dynamic_primary30"
+        android:background="#4D000000"
         android:minHeight="?attr/actionBarSize"
         android:onClick="goMain"
         android:textAlignment="center"
@@ -47,11 +46,11 @@
                 android:layout_height="wrap_content"
                 android:layout_span="3"
                 android:fontFamily="@font/permanent_marker"
-                android:text="Score"
+                android:text="@string/score"
                 android:textAlignment="textEnd"
                 android:textColor="@color/material_dynamic_primary90"
                 android:textColorHighlight="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
         </TableRow>
 
@@ -64,32 +63,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/permanent_marker"
-                android:text="Player 1"
+                android:text="@string/player_1"
                 android:textAlignment="center"
                 android:textColor="@color/material_dynamic_primary90"
                 android:textColorHighlight="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_Token1"
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/permanent_marker"
-                android:text="X"
+                android:text="@string/token_1"
                 android:textAlignment="textStart"
                 android:textColor="@color/material_dynamic_primary90"
                 android:textColorHighlight="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_Score0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/permanent_marker"
-                android:text="0"
+                android:text="@string/token_2"
                 android:textAlignment="center"
                 android:textColor="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
         </TableRow>
 
@@ -102,32 +101,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/permanent_marker"
-                android:text="Player 2"
+                android:text="@string/player_2"
                 android:textAlignment="center"
                 android:textColor="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_Token2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/permanent_marker"
-                android:text="0"
+                android:text="@string/token_2"
                 android:textAlignment="textStart"
                 android:textColor="@color/material_dynamic_primary90"
                 android:textColorHighlight="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_Score2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/permanent_marker"
-                android:text="0"
+                android:text="@string/initial_score"
                 android:textAlignment="center"
                 android:textColor="@color/material_dynamic_primary90"
                 android:textColorHighlight="@color/material_dynamic_primary90"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
         </TableRow>
 
@@ -138,11 +137,13 @@
             <TextView
                 android:id="@+id/tv_Msg"
                 android:layout_width="match_parent"
+                android:layout_height="100sp"
                 android:layout_span="3"
                 android:fontFamily="@font/permanent_marker"
+                android:gravity="center"
                 android:paddingTop="20sp"
                 android:paddingBottom="20sp"
-                android:text="Message"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/material_dynamic_primary90"
                 android:textSize="34sp" />
@@ -165,12 +166,13 @@
             android:layout_weight="1.0">
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_00"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="1sp"
-                android:layout_marginBottom="1sp"
-                android:background="@android:color/transparent"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -182,13 +184,15 @@
                 app:cornerRadius="3sp" />
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_01"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="1sp"
-                android:layout_marginBottom="1sp"
-                android:background="@android:color/transparent"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
+                android:contentDescription="@string/app_name"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
@@ -199,13 +203,13 @@
                 app:cornerRadius="3sp" />
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_02"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="-1sp"
-                android:layout_marginBottom="1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="-1dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -223,13 +227,13 @@
             android:layout_weight="1.0">
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="1sp"
-                android:layout_marginBottom="1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -237,17 +241,17 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:onClick="ClickButton"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:cornerRadius="0sp" />
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_11"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="1sp"
-                android:layout_marginBottom="1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -255,17 +259,17 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:onClick="ClickButton"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:cornerRadius="0sp" />
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_12"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="-1sp"
-                android:layout_marginBottom="1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="-1dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -273,23 +277,24 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:onClick="ClickButton"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:cornerRadius="0sp" />
 
         </TableRow>
 
         <TableRow
+            android:text="@string/button_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0">
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_20"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -297,16 +302,16 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:onClick="ClickButton"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:cornerRadius="0sp" />
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_21"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -314,16 +319,16 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:onClick="ClickButton"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:cornerRadius="0sp" />
 
             <Button
+                android:text="@string/button_text"
                 android:id="@+id/bt_22"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="-1sp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="#0F0F50"
+                android:layout_marginEnd="-1dp"
+                android:backgroundTint="#4D000000"
                 android:clickable="false"
                 android:fontFamily="@font/permanent_marker"
                 android:insetLeft="0dp"
@@ -331,23 +336,22 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:onClick="ClickButton"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:cornerRadius="0sp" />
         </TableRow>
 
     </TableLayout>
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="131dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table_board">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/bt_Continue"
@@ -355,10 +359,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
+            android:backgroundTint="#4D000000"
             android:fontFamily="@font/permanent_marker"
             android:onClick="Continue"
-            android:text="Continue"
-            android:textSize="24dp"
+            android:text="@string/continue_"
+            android:textSize="24sp"
             android:visibility="invisible" />
     </LinearLayout>
 
